@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  class myLocalStorage {
+    constructor(userid) {
+      this.userid = userid;
+    }
+    /**
+     * @param {string} key 存储的键
+     * @param {boolead} bindUSer 是否绑定userid
+    */
+    getItem(key, bindUser) {
+      let storeKey = bindUser ? this.userid + '_' + key : key;
+      let storeVal = JSON.stringify(localStorage.getItem(storeKey)).val;
+      return storeVal;
+    }
+    setItem(key, val, bindUser) {
+      let storeKey = bindUser ? this.userid + '_' + key : key;
+      let storeVal = JSON.stringify({val});
+      localStorage.setItem(storeKey, storeVal)
+    }
+  }
+  const store = new myLocalStorage('legeisme');
+  store.setItem('handsome', false, true);
+  store.getItem('handsome', true); // 取出的是bool 的 false
+</script>
+</html>
